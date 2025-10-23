@@ -1,7 +1,7 @@
 #pragma once
 #include <chrono>
 
-namespace Time
+namespace TimeSpace
 {
 	/*
 	// The TimeService class helps keep track of time in game and calculate delta time.

@@ -12,12 +12,12 @@ namespace Global
     class ServiceLocator
     {
     private:
-        Event::EventService* event_service;
+        EventSpace::EventService* event_service;
         Graphics::GraphicService* graphic_service;
-        Sound::SoundService* sound_service;
+        SoundSpace::SoundService* sound_service;
         UI::UIService* ui_service;
         Level::LevelService* level_service;
-        Time::TimeService* time_service;
+        TimeSpace::TimeService* time_service;
         Player::PlayerService* player_service;
 
         ServiceLocator();
@@ -33,12 +33,12 @@ namespace Global
         void update();
         void render();
 
-        Event::EventService* getEventService();
+        EventSpace::EventService* getEventService();
         Graphics::GraphicService* getGraphicService();
-        Sound::SoundService* getSoundService();
+        SoundSpace::SoundService* getSoundService();
         UI::UIService* getUIService();
         Level::LevelService* getLevelService();
-        Time::TimeService* getTimeService();
+        TimeSpace::TimeService* getTimeService();
         Player::PlayerService* getPlayerService();
         void deleteServiceLocator();
     };

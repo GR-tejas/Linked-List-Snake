@@ -3,10 +3,10 @@
 namespace Global
 {
 	using namespace Graphics;
-	using namespace Event;
-	using namespace Sound;
+	using namespace EventSpace;
+	using namespace SoundSpace;
 	using namespace UI;
-	using namespace Time;
+	using namespace TimeSpace;
 	using namespace Player;
 	using namespace Level;
 
@@ -91,7 +91,7 @@ namespace Global
 
 	UIService* ServiceLocator::getUIService() { return ui_service; }
 
-	Time::TimeService* ServiceLocator::getTimeService() { return time_service; }
+	TimeSpace::TimeService* ServiceLocator::getTimeService() { return time_service; }
 
 	Player::PlayerService* ServiceLocator::getPlayerService() { return player_service; }
 

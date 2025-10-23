@@ -7,7 +7,7 @@ namespace Main
 {
 	using namespace Global;
 	using namespace Graphics;
-	using namespace Event;
+	using namespace EventSpace;
 	using namespace UI;
 
 	GameState GameService::current_state = GameState::BOOT;

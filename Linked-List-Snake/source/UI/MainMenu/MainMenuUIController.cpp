@@ -13,7 +13,7 @@ namespace UI
         using namespace Global;
         using namespace Main;
         using namespace UIElement;
-        using namespace Sound;
+        using namespace SoundSpace;
 
         MainMenuUIController::MainMenuUIController()
         {

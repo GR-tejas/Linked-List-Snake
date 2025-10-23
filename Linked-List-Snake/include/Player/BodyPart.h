@@ -3,6 +3,8 @@
 #include "UI/UIElement/ImageView.h"
 #include "Direction.h"
 
+using namespace sf;
+
 namespace Player
 {
 	class BodyPart
@@ -26,10 +28,18 @@ namespace Player
 		BodyPart();
 		~BodyPart();
 
-		void initialize(float width, float height, sf::Vector2i pos, Direction dir);
+		void initialize(float width, float height, Vector2i pos, Direction dir);
 		float getRotationAngle();
 		void setDirection(Direction direction);
+		Direction getDirection();
+		void setPosition(Vector2i position);
+		Vector2i getPosition();
 		void updatePosition();
+		Vector2i getNextPosition();
+		Vector2i getNextPositionDown();
+		Vector2i getNextPositionUp();
+		Vector2i getNextPositionLeft();
+		Vector2i getNextPositionRight();
 		void render();
 	};
 }
