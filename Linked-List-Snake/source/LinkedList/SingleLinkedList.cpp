@@ -1,6 +1,7 @@
 #include "LinkedList/SingleLinkedList.h"
 #include "Player/BodyPart.h"
 #include "Level/LevelView.h"
+#include <iostream>
 
 namespace LinkedList
 {
@@ -18,9 +19,16 @@ namespace LinkedList
 		default_position = position;
 		default_direction = direction;
 	}
-
-	void SingleLinkedList::render() { }
-
+	void SingleLinkedList::render()
+	{
+		head_node->body_part.render();
+	}
+	void SingleLinkedList::createHeadNode()
+	{
+		head_node = createNode();
+		head_node->body_part.initialize(node_width, node_height, default_position, default_direction);
+		return;
+	}
 	Node* SingleLinkedList::createNode()
 	{
 		return new Node();
