@@ -27,6 +27,9 @@ namespace Player
 		~BodyPart();
 
 		void initialize(float width, float height, sf::Vector2i pos, Direction dir);
+		float getRotationAngle();
+		void setDirection(Direction direction);
+		void updatePosition();
 		void render();
 	};
 }
