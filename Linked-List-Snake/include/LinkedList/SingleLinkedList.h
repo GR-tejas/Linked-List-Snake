@@ -26,6 +26,7 @@ namespace LinkedList
 		void insertNodeAtTail();
 		void updateNodeDirection(Direction direction_to_set);
 		void updateNodePosition();
+		bool processNodeCollision();
 		void initialize(float width, float height, sf::Vector2i position, Direction direction);
 		void render();
 	};
