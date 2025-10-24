@@ -111,4 +111,47 @@ namespace LinkedList
 			cur_node = cur_node->next;
 		}
 	}
+
+	bool SingleLinkedList::processNodeCollision()
+	{
+		if (head_node == nullptr)
+		{
+			return false;
+		}
+
+		sf::Vector2i head_next_position = head_node->body_part.getNextPosition();
+		Node* cur_node = head_node->next;
+
+		while (cur_node != nullptr)
+		{
+			if (cur_node->body_part.getNextPosition().x == head_next_position.x &&
+				cur_node->body_part.getNextPosition().y == head_next_position.y)
+			{
+				return true;
+			}
+			cur_node = cur_node->next;
+		}
+
+		return false;
+	}
+
+	void SingleLinkedList::removeNodeAtHead()
+	{
+		Node* cur_node = head_node;
+		head_node = head_node->next;
+
+		cur_node->next = nullptr;
+		delete (cur_node);
+	}
+
+	void SingleLinkedList::removeAllNodes()
+	{
+		if (head_node == nullptr) return;
+
+		while (head_node != nullptr)
+		{
+			removeNodeAtHead();
+		}
+	}
+
 }
