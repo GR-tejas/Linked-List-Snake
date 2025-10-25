@@ -13,6 +13,13 @@ namespace Player
 		DEAD,
 	};
 
+	enum class InputState
+	{
+		WAITING,
+		PROCESSING
+	};
+
+
 	class SnakeController
 	{
 	private:
@@ -28,6 +35,7 @@ namespace Player
 		float restart_counter = 0.f;
 
 		SnakeState current_snake_state;
+		InputState current_input_state;
 		Direction current_snake_direction;
 		SingleLinkedList* single_linked_list;
 

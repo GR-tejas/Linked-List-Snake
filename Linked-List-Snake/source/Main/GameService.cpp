@@ -58,7 +58,17 @@ namespace Main
 
 	void GameService::destroy() { service_locator->deleteServiceLocator(); }
 
-	void GameService::setGameState(GameState new_state) { current_state = new_state; }
+	void GameService::setGameState(GameState new_state)
+	{
+		current_state = new_state;
+
+		// Trigger level creation when entering gameplay
+		if (new_state == GameState::GAMEPLAY)
+		{
+			ServiceLocator::getInstance()->getLevelService()->createLevel(Level::LevelNumber::ONE);
+		}
+	}
+
 
 	GameState GameService::getGameState() { return current_state; }
 }

@@ -13,6 +13,8 @@ namespace Player
 	SnakeController::SnakeController()
 	{
 		single_linked_list = nullptr;
+		current_snake_direction = default_direction;
+		current_input_state = InputState::WAITING;
 		createLinkedList();
 	}
 
@@ -57,26 +59,31 @@ namespace Player
 
 	void SnakeController::processPlayerInput()
 	{
+		if (current_input_state != InputState::WAITING) return;
+
 		EventService* event_service = ServiceLocator::getInstance()->getEventService();
 
 		if (event_service->pressedUpArrowKey() && current_snake_direction != Direction::DOWN)
 		{
 			current_snake_direction = Direction::UP;
+			current_input_state = InputState::PROCESSING;
 		}
 		else if (event_service->pressedDownArrowKey() && current_snake_direction != Direction::UP)
 		{
 			current_snake_direction = Direction::DOWN;
+			current_input_state = InputState::PROCESSING;
 		}
 		else if (event_service->pressedLeftArrowKey() && current_snake_direction != Direction::RIGHT)
 		{
 			current_snake_direction = Direction::LEFT;
+			current_input_state = InputState::PROCESSING;
 		}
 		else if (event_service->pressedRightArrowKey() && current_snake_direction != Direction::LEFT)
 		{
 			current_snake_direction = Direction::RIGHT;
+			current_input_state = InputState::PROCESSING;
 		}
 	}
-
 
 	void SnakeController::updateSnakeDirection()
 	{
@@ -96,18 +103,34 @@ namespace Player
 		}
 	}
 
-	void SnakeController::handleRestart() { }
+	void SnakeController::handleRestart()
+	{
+		restart_counter += ServiceLocator::getInstance()->getTimeService()->getDeltaTime();
+
+		if (restart_counter >= restart_duration)
+		{
+			respawnSnake();
+		}
+	}
 
 	void SnakeController::spawnSnake() 
 	{
 		for (int i = 0; i < initial_snake_length; i++) 
 		{
-			single_linked_list->insertNodeAtTail();     // Insert nodes at tail to create the initial snake
+			single_linked_list->insertNodeAtTail();
 		}
+		setSnakeState(SnakeState::ALIVE);
 	}
 
-	void SnakeController::reset() {
+	void SnakeController::reset()
+	{
+		current_snake_state = SnakeState::ALIVE;
+		current_snake_direction = default_direction;
+		current_input_state = InputState::WAITING;
+		elapsed_duration = 0.f;
+		restart_counter = 0.f;
 	}
+
 
 	void SnakeController::delayedUpdate()
 	{
@@ -122,12 +145,18 @@ namespace Player
 			if (current_snake_state == SnakeState::ALIVE)
 			{
 				moveSnake();
+				current_input_state = InputState::WAITING;
 			}
 		}
 	}
 
 
-	void SnakeController::respawnSnake() { }
+	void SnakeController::respawnSnake()
+	{
+		single_linked_list->removeAllNodes();
+		reset();
+		spawnSnake();
+	}
 
 	void SnakeController::setSnakeState(SnakeState state)
 	{
