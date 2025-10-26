@@ -73,8 +73,8 @@ namespace UI
 
         void MainMenuUIController::playButtonCallback()
         {
-            GameService::setGameState(GameState::GAMEPLAY);
             ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::BUTTON_CLICK);
+            GameService::setGameState(GameState::LEVEL_SELECTION);
         }
 
         void MainMenuUIController::instructionsButtonCallback()

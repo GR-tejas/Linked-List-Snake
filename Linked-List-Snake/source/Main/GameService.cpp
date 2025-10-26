@@ -63,10 +63,10 @@ namespace Main
 		current_state = new_state;
 
 		// Trigger level creation when entering gameplay
-		if (new_state == GameState::GAMEPLAY)
+		/*if (new_state == GameState::GAMEPLAY)
 		{
 			ServiceLocator::getInstance()->getLevelService()->createLevel(Level::LevelNumber::ONE);
-		}
+		}*/
 	}
 
 
