@@ -18,6 +18,8 @@ namespace Element
 		ElementService();
 		~ElementService();
 
+		std::vector<sf::Vector2i> getElementsPositionList();
+
 		void initialize();
 		void update();
 		void render();

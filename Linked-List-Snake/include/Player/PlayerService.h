@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+#include <SFML/System/Vector2.hpp> 
 
 namespace Player
 {
@@ -15,6 +17,8 @@ namespace Player
 	public:
 		PlayerService();
 		~PlayerService();
+
+		std::vector<sf::Vector2i> getCurrentSnakePositionList();
 
 		void initialize();
 		void update();

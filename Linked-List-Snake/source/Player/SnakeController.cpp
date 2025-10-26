@@ -36,6 +36,11 @@ namespace Player
 		single_linked_list->initialize(width, height, default_position, default_direction);
 	}
 
+	std::vector<sf::Vector2i> SnakeController::getCurrentSnakePositionList()
+	{
+		return single_linked_list->getNodesPositionList();
+	}
+
 	void SnakeController::update()
 	{
 		switch (current_snake_state)

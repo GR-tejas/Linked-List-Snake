@@ -21,6 +21,8 @@ namespace Element
         Obstacle();
         ~Obstacle();
 
+        sf::Vector2i getObstaclePosition();
+
         void initialize(sf::Vector2i grid_pos, float width, float height);
         void update();
         void render();
