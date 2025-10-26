@@ -7,7 +7,6 @@
 #include "Time/TimeService.h"
 #include "Player/PlayerService.h"
 #include "Element/ElementService.h"
-#include "Main/GameService.h"
 
 namespace Global
 {
