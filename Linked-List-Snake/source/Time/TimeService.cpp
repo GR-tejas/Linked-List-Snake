@@ -1,6 +1,6 @@
 #include "Time/TimeService.h"
 
-namespace Time
+namespace TimeSpace
 {
 	void TimeService::initialize()
 	{

@@ -3,6 +3,7 @@
 #include "UI/SplashScreen/SplashScreenUIController.h"
 #include "Instructions/InstructionsScreenUIController.h"
 #include "UI/Credits/CreditsScreenUIController.h"
+#include "UI/LevelSelection/LevelSelectionUIController.h"
 #include "UI/Interface/IUIController.h"
 
 namespace UI
@@ -14,7 +15,7 @@ namespace UI
 		MainMenu::MainMenuUIController* main_menu_controller;
 		Instructions::InstructionsScreenUIController* instructions_screen_ui_controller;
 		Credits::CreditsScreenUIController* credits_screen_ui_controller;
-
+		LevelSelection::LevelSelectionUIController* level_selection_controller;
 
 		void createControllers();
 		void initializeControllers();
