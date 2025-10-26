@@ -7,7 +7,7 @@ namespace UI
 {
     namespace UIElement
     {
-        using namespace Event;
+        using namespace EventSpace;
         using namespace Global;
 
         ButtonView::ButtonView() = default;

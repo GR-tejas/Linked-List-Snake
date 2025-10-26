@@ -10,8 +10,8 @@ namespace UI
     namespace Credits
     {
         using namespace Global;
-        using namespace Event;
-        using namespace Sound;
+        using namespace EventSpace;
+        using namespace SoundSpace;
         using namespace Main;
         using namespace UI::UIElement;
 

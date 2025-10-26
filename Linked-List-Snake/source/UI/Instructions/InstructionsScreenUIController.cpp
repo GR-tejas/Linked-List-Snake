@@ -10,8 +10,8 @@ namespace UI
     namespace Instructions
     {
         using namespace Global;
-        using namespace Event;
-        using namespace Sound;
+        using namespace EventSpace;
+        using namespace SoundSpace;
         using namespace Main;
         using namespace Graphics;
         using namespace UI::UIElement;
