@@ -7,7 +7,8 @@ namespace SoundSpace
 	{
 		BUTTON_CLICK,
 		DEATH,
-		EAT
+		EAT,
+		PICKUP
 	};
 
 	class SoundService

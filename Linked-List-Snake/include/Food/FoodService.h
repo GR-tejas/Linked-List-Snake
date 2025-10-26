@@ -3,6 +3,11 @@
 #include <random>
 #include <vector>
 
+namespace LinkedList
+{
+	struct Node;
+}
+
 namespace Food
 {
 	enum class FoodType;
@@ -27,10 +32,8 @@ namespace Food
 		float cell_width;
 		float cell_height;
 
-		// To generate random values.
 		std::default_random_engine random_engine;
 
-		// To give random seed to generator.
 		std::random_device random_device;
 
 		FoodItem* createFood(sf::Vector2i position, FoodType type);
@@ -42,7 +45,6 @@ namespace Food
 
 		bool isValidPosition(std::vector<sf::Vector2i> position_data, sf::Vector2i food_position);
 
-		void destroyFood();
 		void updateElapsedDuration();
 		void handleFoodSpawning();
 		void reset();
@@ -54,6 +56,10 @@ namespace Food
 		void initialize();
 		void update();
 		void render();
+
+		bool processFoodCollision(LinkedList::Node* head_node, FoodType& out_food_type);
+
+		void destroyFood();
 
 		void startFoodSpawning();
 		void stopFoodSpawning();

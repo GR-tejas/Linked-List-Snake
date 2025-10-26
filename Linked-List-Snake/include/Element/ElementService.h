@@ -2,6 +2,11 @@
 #include <vector>
 #include <SFML/System/Vector2.hpp>
 
+namespace LinkedList
+{
+	struct Node;
+}
+
 namespace Element
 {
 	class Obstacle;
@@ -19,6 +24,8 @@ namespace Element
 		~ElementService();
 
 		std::vector<sf::Vector2i> getElementsPositionList();
+
+		bool processElementsCollision(LinkedList::Node* head_node);
 
 		void initialize();
 		void update();

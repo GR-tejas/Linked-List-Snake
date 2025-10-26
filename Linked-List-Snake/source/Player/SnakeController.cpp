@@ -3,6 +3,8 @@
 #include "Level/LevelService.h"
 #include "Event/EventService.h"
 #include "Sound/SoundService.h"
+#include "Element/ElementService.h"
+#include "Food/FoodService.h"  
 
 namespace Player
 {
@@ -11,6 +13,7 @@ namespace Player
 	using namespace Level;
 	using namespace EventSpace;
 	using namespace SoundSpace;
+	using namespace Element;
 
 	SnakeController::SnakeController()
 	{
@@ -36,6 +39,58 @@ namespace Player
 		float height = ServiceLocator::getInstance()->getLevelService()->getCellHeight();
 
 		single_linked_list->initialize(width, height, default_position, default_direction);
+	}
+
+	void SnakeController::processFoodCollision()
+	{
+		FoodService* food_service = ServiceLocator::getInstance()->getFoodService();
+		FoodType food_type;
+
+		if (food_service->processFoodCollision(single_linked_list->getHeadNode(), food_type))
+		{
+			ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::PICKUP);
+
+			food_service->destroyFood();
+			OnFoodCollected(food_type);
+		}
+	}
+
+	void SnakeController::OnFoodCollected(FoodType food_type)
+	{
+		switch (food_type)
+		{
+		case FoodType::PIZZA:
+			// Insert At Tail - snake grows from back
+			break;
+
+		case FoodType::BURGER:
+			// Insert At Head - snake grows from front
+			break;
+
+		case FoodType::CHEESE:
+			// Insert in Middle - snake grows from center
+			break;
+
+		case FoodType::APPLE:
+			// Delete at Head - snake shrinks from front
+			break;
+
+		case FoodType::MANGO:
+			// Delete at Middle - snake shrinks from center
+			break;
+
+		case FoodType::ORANGE:
+			// Delete at Tail - snake shrinks from back
+			break;
+
+		case FoodType::POISION:
+			// Delete half the snake - dangerous!
+			break;
+
+		case FoodType::ALCOHOL:
+			// Reverse the snake - confusing!
+			break;
+		}
 	}
 
 	std::vector<sf::Vector2i> SnakeController::getCurrentSnakePositionList()
@@ -76,12 +131,13 @@ namespace Player
 
 	void SnakeController::processElementsCollision()
 	{
-		
-	}
+		ElementService* element_service = ServiceLocator::getInstance()->getElementService();
 
-	void SnakeController::processFoodCollision()
-	{
-
+		if (element_service->processElementsCollision(single_linked_list->getHeadNode()))
+		{
+			current_snake_state = SnakeState::DEAD;
+			ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::DEATH);
+		}
 	}
 
 	void SnakeController::render()
@@ -125,14 +181,6 @@ namespace Player
 	void SnakeController::moveSnake()
 	{
 		single_linked_list->updateNodePosition();
-	}
-
-	void SnakeController::processSnakeCollision()
-	{
-		if (single_linked_list->processNodeCollision())
-		{
-			current_snake_state = SnakeState::DEAD;
-		}
 	}
 
 	void SnakeController::handleRestart()

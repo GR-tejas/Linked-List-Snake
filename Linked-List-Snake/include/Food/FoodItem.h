@@ -28,6 +28,8 @@ namespace Food
         FoodItem();
         ~FoodItem();
 
+        sf::Vector2i getFoodPosition();
+
         void initialize(sf::Vector2i grid_pos, float width, float height, FoodType type);
         void update();
         void render();
