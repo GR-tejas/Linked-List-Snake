@@ -12,8 +12,8 @@ namespace UI
 {
     using namespace UIElement;
     using namespace Global;
-    using namespace Event;
-    using namespace Sound;
+    using namespace EventSpace;
+    using namespace SoundSpace;
     using namespace Main;
 
     namespace LevelSelection
