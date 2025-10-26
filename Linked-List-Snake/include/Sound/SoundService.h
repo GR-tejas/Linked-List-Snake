@@ -6,6 +6,8 @@ namespace SoundSpace
 	enum class SoundType
 	{
 		BUTTON_CLICK,
+		DEATH,
+		EAT
 	};
 
 	class SoundService

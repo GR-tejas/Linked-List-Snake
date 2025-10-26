@@ -39,6 +39,10 @@ namespace Player
 		Direction current_snake_direction;
 		SingleLinkedList* single_linked_list;
 
+		void processBodyCollision();
+		void processElementsCollision();
+		void processFoodCollision();
+
 		void createLinkedList();
 		void processPlayerInput();
 		void updateSnakeDirection();

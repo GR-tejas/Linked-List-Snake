@@ -2,6 +2,7 @@
 #include "Global/ServiceLocator.h"
 #include "Level/LevelService.h"
 #include "Event/EventService.h"
+#include "Sound/SoundService.h"
 
 namespace Player
 {
@@ -9,6 +10,7 @@ namespace Player
 	using namespace Global;
 	using namespace Level;
 	using namespace EventSpace;
+	using namespace SoundSpace;
 
 	SnakeController::SnakeController()
 	{
@@ -56,6 +58,31 @@ namespace Player
 		}
 	}
 
+	void SnakeController::processSnakeCollision()
+	{
+		processBodyCollision();
+		processElementsCollision();
+		processFoodCollision();
+	}
+
+	void SnakeController::processBodyCollision()
+	{
+		if (single_linked_list->processNodeCollision())
+		{
+			current_snake_state = SnakeState::DEAD;
+			ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::DEATH);
+		}
+	}
+
+	void SnakeController::processElementsCollision()
+	{
+		
+	}
+
+	void SnakeController::processFoodCollision()
+	{
+
+	}
 
 	void SnakeController::render()
 	{
