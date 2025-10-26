@@ -1,6 +1,7 @@
 #include "Level/LevelService.h"
 #include "Level/LevelController.h"
 #include "Global/ServiceLocator.h"
+#include "Food/FoodService.h"
 
 namespace Level
 {
@@ -43,6 +44,12 @@ namespace Level
 		current_level = level_to_load;
 		spawnLevelElements(level_to_load);  // Add this line
 		spawnPlayer();
+		spawnFood();
+	}
+
+	void LevelService::spawnFood()
+	{
+		ServiceLocator::getInstance()->getFoodService()->startFoodSpawning();
 	}
 
 	void LevelService::spawnLevelElements(LevelNumber level_to_load)

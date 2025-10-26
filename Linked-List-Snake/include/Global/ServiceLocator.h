@@ -7,6 +7,7 @@
 #include "Time/TimeService.h"
 #include "Player/PlayerService.h"
 #include "Element/ElementService.h"
+#include "Food/FoodService.h" 
 
 namespace Global
 {
@@ -21,6 +22,7 @@ namespace Global
         TimeSpace::TimeService* time_service;
         Player::PlayerService* player_service;
         Element::ElementService* element_service;
+        Food::FoodService* food_service;
 
         ServiceLocator();
         ~ServiceLocator();
@@ -43,6 +45,7 @@ namespace Global
         TimeSpace::TimeService* getTimeService();
         Player::PlayerService* getPlayerService();
         Element::ElementService* getElementService();
+        Food::FoodService* getFoodService();
         void deleteServiceLocator();
     };
 }
