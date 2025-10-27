@@ -24,6 +24,8 @@ namespace LinkedList
 		sf::Vector2i default_position;
 		Direction default_direction;
 
+		int linked_list_size;
+
 		Node* createNode();
 
 	public:
@@ -51,5 +53,6 @@ namespace LinkedList
 
 		Node* getHeadNode();
 		std::vector<sf::Vector2i> getNodesPositionList();
+		int getSize();
 	};
 }

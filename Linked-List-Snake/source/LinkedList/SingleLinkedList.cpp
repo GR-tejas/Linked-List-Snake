@@ -8,6 +8,7 @@ namespace LinkedList
 	SingleLinkedList::SingleLinkedList()
 	{
 		head_node = nullptr;
+		linked_list_size = 0;
 	}
 
 	SingleLinkedList::~SingleLinkedList() = default;
@@ -18,6 +19,7 @@ namespace LinkedList
 		node_height = height;
 		default_position = position;
 		default_direction = direction;
+		linked_list_size = 0;
 	}
 
 	void SingleLinkedList::render()
@@ -63,6 +65,7 @@ namespace LinkedList
 
 	void SingleLinkedList::insertNodeAtTail()
 	{
+		linked_list_size++;
 		Node* new_node = createNode();
 
 		if (head_node == nullptr)
@@ -73,7 +76,6 @@ namespace LinkedList
 			return;
 		}
 
-		// Find tail node
 		Node* cur_node = head_node;
 		while (cur_node->next != nullptr)
 		{
@@ -87,12 +89,13 @@ namespace LinkedList
 
 	void SingleLinkedList::insertNodeAtHead()
 	{
+		linked_list_size++;
 		Node* new_node = createNode();
 
 		if (head_node == nullptr)
 		{
-			initializeNode(new_node, nullptr, Operation::HEAD);
 			head_node = new_node;
+			initializeNode(new_node, nullptr, Operation::HEAD);
 			new_node->next = nullptr;
 			return;
 		}
@@ -110,16 +113,17 @@ namespace LinkedList
 			return;
 		}
 
-		Node* cur_node = head_node;
-		for (int i = 0; i < index - 1 && cur_node != nullptr; i++)
-		{
-			cur_node = cur_node->next;
-		}
-
-		if (cur_node == nullptr)
+		if (index >= linked_list_size)
 		{
 			insertNodeAtTail();
 			return;
+		}
+
+		linked_list_size++;
+		Node* cur_node = head_node;
+		for (int i = 0; i < index - 1; i++)
+		{
+			cur_node = cur_node->next;
 		}
 
 		Node* new_node = createNode();
@@ -132,6 +136,7 @@ namespace LinkedList
 	{
 		if (head_node == nullptr) return;
 
+		linked_list_size--;
 		Node* node_to_remove = head_node;
 		head_node = head_node->next;
 		delete node_to_remove;
@@ -140,6 +145,8 @@ namespace LinkedList
 	void SingleLinkedList::removeNodeAtTail()
 	{
 		if (head_node == nullptr) return;
+
+		linked_list_size--;
 
 		if (head_node->next == nullptr)
 		{
@@ -166,13 +173,18 @@ namespace LinkedList
 			return;
 		}
 
+		if (index >= linked_list_size - 1)
+		{
+			removeNodeAtTail();
+			return;
+		}
+
+		linked_list_size--;
 		Node* cur_node = head_node;
-		for (int i = 0; i < index - 1 && cur_node->next != nullptr; i++)
+		for (int i = 0; i < index - 1; i++)
 		{
 			cur_node = cur_node->next;
 		}
-
-		if (cur_node->next == nullptr) return;
 
 		Node* node_to_remove = cur_node->next;
 		cur_node->next = node_to_remove->next;
@@ -185,6 +197,7 @@ namespace LinkedList
 		{
 			removeNodeAtHead();
 		}
+		linked_list_size = 0;
 	}
 
 	void SingleLinkedList::updateNodeDirection(Direction direction_to_set)
@@ -237,6 +250,7 @@ namespace LinkedList
 	std::vector<sf::Vector2i> SingleLinkedList::getNodesPositionList()
 	{
 		std::vector<sf::Vector2i> nodes_position_list;
+		nodes_position_list.reserve(linked_list_size);
 
 		Node* cur_node = head_node;
 
@@ -252,5 +266,10 @@ namespace LinkedList
 	LinkedList::Node* SingleLinkedList::getHeadNode()
 	{
 		return head_node;
+	}
+
+	int SingleLinkedList::getSize()
+	{
+		return linked_list_size;
 	}
 }
