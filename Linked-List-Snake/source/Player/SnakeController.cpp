@@ -72,7 +72,7 @@ namespace Player
 			break;
 
 		case FoodType::APPLE:
-			// Delete at Head - snake shrinks from front
+			single_linked_list->removeNodeAtHead();
 			break;
 
 		case FoodType::MANGO:

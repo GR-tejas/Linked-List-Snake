@@ -197,9 +197,12 @@ namespace LinkedList
 		if (head_node == nullptr) return;
 
 		linked_list_size--;
-		Node* node_to_remove = head_node;
+
+		Node* cur_node = head_node;
 		head_node = head_node->next;
-		delete node_to_remove;
+
+		cur_node->next = nullptr;
+		delete cur_node;
 	}
 
 	void SingleLinkedList::removeNodeAtTail()
