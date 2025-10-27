@@ -143,12 +143,39 @@ namespace LinkedList
 		shiftNodesAfterInsertion(new_node, cur_node, prev_node);
 	}
 
+	int SingleLinkedList::findMiddleNode()
+	{
+		Node* slow = head_node; 
+		Node* fast = head_node;
+		int midIndex = 0;  
+
+		while (fast != nullptr && fast->next != nullptr)
+		{
+			slow = slow->next;       
+			fast = fast->next->next;
+			midIndex++;
+		}
+
+		return midIndex;
+	}
+
+	void SingleLinkedList::insertNodeAtMiddle()
+	{
+		if (head_node == nullptr)
+		{
+			insertNodeAtHead();
+			return;
+		}
+
+		int midIndex = findMiddleNode();
+		insertNodeAtIndex(midIndex);
+	}
+
 	void SingleLinkedList::shiftNodesAfterInsertion(Node* new_node, Node* cur_node, Node* prev_node)
 	{
 		Node* next_node = cur_node;
 		cur_node = new_node;
 
-		// Shift each node to take the position of the node behind it
 		while (cur_node != nullptr && next_node != nullptr)
 		{
 			cur_node->body_part.setPosition(next_node->body_part.getPosition());
@@ -159,7 +186,6 @@ namespace LinkedList
 			next_node = next_node->next;
 		}
 
-		// Initialize the last node as if it's being added to the tail
 		if (cur_node != nullptr)
 		{
 			initializeNode(cur_node, prev_node, Operation::TAIL);

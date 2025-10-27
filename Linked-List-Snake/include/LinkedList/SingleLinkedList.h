@@ -53,6 +53,9 @@ namespace LinkedList
 		void updateNodePosition();
 		bool processNodeCollision();
 
+		void insertNodeAtMiddle();
+		int findMiddleNode();
+
 		Node* getHeadNode();
 		std::vector<sf::Vector2i> getNodesPositionList();
 		int getSize();
