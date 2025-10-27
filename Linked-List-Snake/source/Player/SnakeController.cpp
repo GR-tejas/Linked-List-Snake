@@ -80,7 +80,7 @@ namespace Player
 			break;
 
 		case FoodType::ORANGE:
-			// Delete at Tail - snake shrinks from back
+			single_linked_list->removeNodeAtTail();
 			break;
 
 		case FoodType::POISION:
