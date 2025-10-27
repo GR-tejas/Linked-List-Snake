@@ -59,16 +59,16 @@ namespace Player
 	{
 		switch (food_type)
 		{
-		case FoodType::PIZZA:
-			// Insert At Tail - snake grows from back
+		case FoodType::BURGER:
+			single_linked_list->insertNodeAtHead();
 			break;
 
-		case FoodType::BURGER:
-			// Insert At Head - snake grows from front
+		case FoodType::PIZZA:
+			single_linked_list->insertNodeAtTail();
 			break;
 
 		case FoodType::CHEESE:
-			// Insert in Middle - snake grows from center
+			single_linked_list->insertNodeAtIndex(single_linked_list->getSize() / 2);
 			break;
 
 		case FoodType::APPLE:

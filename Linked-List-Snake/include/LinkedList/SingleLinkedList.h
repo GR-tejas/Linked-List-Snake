@@ -26,6 +26,8 @@ namespace LinkedList
 
 		int linked_list_size;
 
+		void shiftNodesAfterInsertion(Node* new_node, Node* cur_node, Node* prev_node);
+
 		Node* createNode();
 
 	public:

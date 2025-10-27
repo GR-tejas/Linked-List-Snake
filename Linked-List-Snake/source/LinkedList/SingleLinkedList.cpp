@@ -107,29 +107,63 @@ namespace LinkedList
 
 	void SingleLinkedList::insertNodeAtIndex(int index)
 	{
-		if (index <= 0)
+		if (index < 0 || index > linked_list_size) return;
+
+		if (index == 0)
 		{
 			insertNodeAtHead();
 			return;
 		}
 
-		if (index >= linked_list_size)
+		if (index == linked_list_size)
 		{
 			insertNodeAtTail();
 			return;
 		}
 
 		linked_list_size++;
+		Node* new_node = createNode();
+
+		int current_index = 0;
 		Node* cur_node = head_node;
-		for (int i = 0; i < index - 1; i++)
+		Node* prev_node = nullptr;
+
+		while (cur_node != nullptr && current_index < index)
 		{
+			prev_node = cur_node;
 			cur_node = cur_node->next;
+			current_index++;
 		}
 
-		Node* new_node = createNode();
-		initializeNode(new_node, cur_node, Operation::MID);
-		new_node->next = cur_node->next;
-		cur_node->next = new_node;
+		prev_node->next = new_node;
+		new_node->next = cur_node;
+
+		initializeNode(new_node, prev_node, Operation::MID);
+
+		shiftNodesAfterInsertion(new_node, cur_node, prev_node);
+	}
+
+	void SingleLinkedList::shiftNodesAfterInsertion(Node* new_node, Node* cur_node, Node* prev_node)
+	{
+		Node* next_node = cur_node;
+		cur_node = new_node;
+
+		// Shift each node to take the position of the node behind it
+		while (cur_node != nullptr && next_node != nullptr)
+		{
+			cur_node->body_part.setPosition(next_node->body_part.getPosition());
+			cur_node->body_part.setDirection(next_node->body_part.getDirection());
+
+			prev_node = cur_node;
+			cur_node = next_node;
+			next_node = next_node->next;
+		}
+
+		// Initialize the last node as if it's being added to the tail
+		if (cur_node != nullptr)
+		{
+			initializeNode(cur_node, prev_node, Operation::TAIL);
+		}
 	}
 
 	void SingleLinkedList::removeNodeAtHead()
