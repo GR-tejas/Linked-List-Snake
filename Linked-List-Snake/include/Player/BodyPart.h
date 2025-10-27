@@ -40,6 +40,7 @@ namespace Player
 		Vector2i getNextPositionUp();
 		Vector2i getNextPositionLeft();
 		Vector2i getNextPositionRight();
+		sf::Vector2i getPrevPosition();
 		void render();
 	};
 }
