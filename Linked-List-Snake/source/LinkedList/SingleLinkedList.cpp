@@ -254,6 +254,49 @@ namespace LinkedList
 		delete node_to_remove;
 	}
 
+	Node* SingleLinkedList::findNodeAtIndex(int index)
+	{
+		if (index < 0 || index >= linked_list_size || head_node == nullptr)
+			return nullptr;
+
+		Node* cur_node = head_node;
+		for (int i = 0; i < index; i++)
+		{
+			cur_node = cur_node->next;
+			if (cur_node == nullptr) return nullptr;  // Safety check
+		}
+
+		return cur_node;
+	}
+
+	void SingleLinkedList::removeHalfNodes()
+	{
+		if (linked_list_size <= 1) return;  // Can't split snake smaller than 2 nodes
+
+		int half_length = linked_list_size / 2;
+		int new_tail_index = half_length - 1;  // Formula: (size/2) - 1
+
+		// Find the new tail node
+		Node* new_tail_node = findNodeAtIndex(new_tail_index);
+		if (new_tail_node == nullptr) return;  // Safety check
+
+		// Start deleting from the node after new tail
+		Node* cur_node = new_tail_node->next;
+
+		// Delete all nodes from new_tail+1 to end
+		while (cur_node != nullptr)
+		{
+			Node* node_to_delete = cur_node;
+			cur_node = cur_node->next;
+
+			delete node_to_delete;
+			linked_list_size--;  // Decrement size for each deleted node
+		}
+
+		// Set new tail's next to nullptr (cut the snake!)
+		new_tail_node->next = nullptr;
+	}
+
 	void SingleLinkedList::removeAllNodes()
 	{
 		while (head_node != nullptr)

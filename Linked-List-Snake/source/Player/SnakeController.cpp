@@ -84,7 +84,7 @@ namespace Player
 			break;
 
 		case FoodType::POISION:
-			// Delete half the snake - dangerous!
+			single_linked_list->removeHalfNodes();
 			break;
 
 		case FoodType::ALCOHOL:
