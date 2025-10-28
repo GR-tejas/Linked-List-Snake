@@ -1,8 +1,6 @@
 #pragma once
 #include <SFML/System/Vector2.hpp>
-#include <vector>
 #include "LinkedList/Node.h"
-#include "Player/Direction.h"
 
 namespace LinkedList
 {
@@ -26,9 +24,13 @@ namespace LinkedList
 
 		int linked_list_size;
 
-		void shiftNodesAfterInsertion(Node* new_node, Node* cur_node, Node* prev_node);
-
 		Node* createNode();
+		void initializeNode(Node* new_node, Node* reference_node, Operation operation);
+		sf::Vector2i getNewNodePosition(Node* reference_node, Operation operation);
+		Direction getReverseDirection(Direction reference_direction);
+
+		void updateNodes(Direction directionToSet);
+		int findMiddleNode();
 
 	public:
 		SingleLinkedList();
@@ -37,34 +39,31 @@ namespace LinkedList
 		void initialize(float width, float height, sf::Vector2i position, Direction direction);
 		void render();
 
-		sf::Vector2i getNewNodePosition(Node* reference_node, Operation operation);
-		void initializeNode(Node* new_node, Node* reference_node, Operation operation);
-
-		Direction reverse();
-		void reverseNodeDirections();
-		Direction getReverseDirection(Direction reference_direction);
-
 		void insertNodeAtTail();
 		void insertNodeAtHead();
-		void insertNodeAtIndex(int index);
-
-		void removeNodeAtHead();
-		void removeNodeAtTail();
-		void removeNodeAtIndex(int index);
-		void removeNodeAtMiddle();
-		void removeHalfNodes();
-		void removeAllNodes();
-
-		void updateNodeDirection(Direction direction_to_set);
-		void updateNodePosition();
-		bool processNodeCollision();
-
 		void insertNodeAtMiddle();
-		int findMiddleNode();
-		Node* findNodeAtIndex(int index);
+		void insertNodeAtIndex(int index);
+		void shiftNodesAfterInsertion(Node* new_node, Node* cur_node, Node* prev_node);
 
+		void removeNodeAtTail();
+		void removeNodeAtHead();
+		void removeNodeAtMiddle();
+		void removeNodeAt(int index);
+		void removeNodeAtIndex(int index);
+		void removeAllNodes();
+		void removeHalfNodes();
+		void shiftNodesAfterRemoval(Node* cur_node);
+
+		Node* findNodeAtIndex(int index);
+		Direction reverse();
+		void reverseNodeDirections();
+		void updateNodePosition();
+		void updateNodeDirection(Direction direction_to_set);
+
+		bool processNodeCollision();
 		Node* getHeadNode();
+		int getLinkedListSize();
+
 		std::vector<sf::Vector2i> getNodesPositionList();
-		int getSize();
 	};
 }
