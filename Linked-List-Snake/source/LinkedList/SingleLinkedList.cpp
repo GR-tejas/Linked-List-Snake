@@ -171,6 +171,13 @@ namespace LinkedList
 		insertNodeAtIndex(midIndex);
 	}
 
+	void SingleLinkedList::removeNodeAtMiddle() {
+		if (head_node == nullptr) return; // If the list is empty, there's nothing to remove
+
+		int midIndex = findMiddleNode();  // Use the existing function to find the middle index
+		removeNodeAtIndex(midIndex);           // Use the existing function to remove the node at the found index
+	}
+
 	void SingleLinkedList::shiftNodesAfterInsertion(Node* new_node, Node* cur_node, Node* prev_node)
 	{
 		Node* next_node = cur_node;

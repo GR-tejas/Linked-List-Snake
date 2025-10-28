@@ -51,6 +51,7 @@ namespace LinkedList
 		void removeNodeAtHead();
 		void removeNodeAtTail();
 		void removeNodeAtIndex(int index);
+		void removeNodeAtMiddle();
 		void removeHalfNodes();
 		void removeAllNodes();
 

@@ -59,16 +59,16 @@ namespace Player
 	{
 		switch (food_type)
 		{
-		case FoodType::BURGER:
-			single_linked_list->insertNodeAtHead();
-			break;
-
 		case FoodType::PIZZA:
 			single_linked_list->insertNodeAtTail();
 			break;
 
+		case FoodType::BURGER:
+			single_linked_list->insertNodeAtHead();
+			break;
+
 		case FoodType::CHEESE:
-			single_linked_list->insertNodeAtIndex(single_linked_list->getSize() / 2);
+			single_linked_list->insertNodeAtMiddle();
 			break;
 
 		case FoodType::APPLE:
@@ -76,7 +76,7 @@ namespace Player
 			break;
 
 		case FoodType::MANGO:
-			// Delete at Middle - snake shrinks from center
+			single_linked_list->removeNodeAtMiddle();
 			break;
 
 		case FoodType::ORANGE:
@@ -88,10 +88,7 @@ namespace Player
 			break;
 
 		case FoodType::ALCOHOL:
-		{
-			Direction new_direction = single_linked_list->reverse();
-			current_snake_direction = new_direction;
-		}
+			current_snake_direction = single_linked_list->reverse();
 			break;
 		}
 	}
