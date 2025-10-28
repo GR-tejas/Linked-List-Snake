@@ -263,7 +263,7 @@ namespace LinkedList
 		for (int i = 0; i < index; i++)
 		{
 			cur_node = cur_node->next;
-			if (cur_node == nullptr) return nullptr;  // Safety check
+			if (cur_node == nullptr) return nullptr;
 		}
 
 		return cur_node;
@@ -271,30 +271,79 @@ namespace LinkedList
 
 	void SingleLinkedList::removeHalfNodes()
 	{
-		if (linked_list_size <= 1) return;  // Can't split snake smaller than 2 nodes
+		if (linked_list_size <= 1) return;
 
 		int half_length = linked_list_size / 2;
-		int new_tail_index = half_length - 1;  // Formula: (size/2) - 1
+		int new_tail_index = half_length - 1;
 
-		// Find the new tail node
 		Node* new_tail_node = findNodeAtIndex(new_tail_index);
-		if (new_tail_node == nullptr) return;  // Safety check
+		if (new_tail_node == nullptr) return;
 
-		// Start deleting from the node after new tail
 		Node* cur_node = new_tail_node->next;
 
-		// Delete all nodes from new_tail+1 to end
 		while (cur_node != nullptr)
 		{
 			Node* node_to_delete = cur_node;
 			cur_node = cur_node->next;
 
 			delete node_to_delete;
-			linked_list_size--;  // Decrement size for each deleted node
+			linked_list_size--;
 		}
 
-		// Set new tail's next to nullptr (cut the snake!)
 		new_tail_node->next = nullptr;
+	}
+
+	Direction SingleLinkedList::getReverseDirection(Direction reference_direction)
+	{
+		switch (reference_direction)
+		{
+		case Direction::UP:
+			return Direction::DOWN;
+		case Direction::DOWN:
+			return Direction::UP;
+		case Direction::LEFT:
+			return Direction::RIGHT;
+		case Direction::RIGHT:
+			return Direction::LEFT;
+		default:
+			return Direction::RIGHT;
+		}
+	}
+
+	void SingleLinkedList::reverseNodeDirections()
+	{
+		Node* curr_node = head_node;
+
+		while (curr_node != nullptr)
+		{
+			Direction prev_dir = curr_node->body_part.getPreviousDirection();
+			Direction reversed_dir = getReverseDirection(prev_dir);
+			curr_node->body_part.setDirection(reversed_dir);
+
+			curr_node = curr_node->next;
+		}
+	}
+
+	Direction SingleLinkedList::reverse()
+	{
+		Node* cur_node = head_node;
+		Node* prev_node = nullptr;
+		Node* next_node = nullptr;
+
+		while (cur_node != nullptr)
+		{
+			next_node = cur_node->next;
+			cur_node->next = prev_node;
+
+			prev_node = cur_node;
+			cur_node = next_node;
+		}
+
+		head_node = prev_node;
+
+		reverseNodeDirections();
+
+		return head_node->body_part.getDirection();
 	}
 
 	void SingleLinkedList::removeAllNodes()

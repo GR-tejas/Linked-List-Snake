@@ -88,7 +88,10 @@ namespace Player
 			break;
 
 		case FoodType::ALCOHOL:
-			// Reverse the snake - confusing!
+		{
+			Direction new_direction = single_linked_list->reverse();
+			current_snake_direction = new_direction;
+		}
 			break;
 		}
 	}

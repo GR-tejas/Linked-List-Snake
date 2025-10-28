@@ -14,6 +14,7 @@ namespace Player
 
 		sf::Vector2i grid_position;
 		Direction direction;
+		Direction previous_direction;
 
 		float bodypart_width;
 		float bodypart_height;
@@ -32,6 +33,7 @@ namespace Player
 		float getRotationAngle();
 		void setDirection(Direction direction);
 		Direction getDirection();
+		Direction getPreviousDirection();
 		void setPosition(Vector2i position);
 		Vector2i getPosition();
 		void updatePosition();

@@ -40,6 +40,10 @@ namespace LinkedList
 		sf::Vector2i getNewNodePosition(Node* reference_node, Operation operation);
 		void initializeNode(Node* new_node, Node* reference_node, Operation operation);
 
+		Direction reverse();
+		void reverseNodeDirections();
+		Direction getReverseDirection(Direction reference_direction);
+
 		void insertNodeAtTail();
 		void insertNodeAtHead();
 		void insertNodeAtIndex(int index);
