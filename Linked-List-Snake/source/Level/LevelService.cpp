@@ -61,6 +61,11 @@ namespace Level
 		ServiceLocator::getInstance()->getElementService()->spawnElements(element_data_list, cell_width, cell_height);
 	}
 
+	LevelNumber LevelService::getCurrentLevel()
+	{
+		return current_level;
+	}
+
 	float LevelService::getCellWidth()
 	{
 		return level_controller->getCellWidth();

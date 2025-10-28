@@ -6,7 +6,6 @@ namespace Player
 	PlayerService::PlayerService()
 	{
 		snake_controller = nullptr;
-
 		createController();
 	}
 
@@ -22,31 +21,64 @@ namespace Player
 
 	void PlayerService::initialize()
 	{
-		snake_controller->initialize();
+		if (snake_controller != nullptr)
+			snake_controller->initialize();
 	}
 
 	void PlayerService::update()
 	{
-		snake_controller->update();
+		if (snake_controller != nullptr)
+			snake_controller->update();
 	}
 
 	void PlayerService::render()
 	{
-		snake_controller->render();
+		if (snake_controller != nullptr)
+			snake_controller->render();
 	}
 
 	void PlayerService::spawnPlayer()
 	{
-		snake_controller->spawnSnake();
+		if (snake_controller != nullptr)
+		{
+			snake_controller->spawnSnake();
+		}
+	}
+
+	int PlayerService::getPlayerScore()
+	{
+		if (snake_controller != nullptr)
+			return snake_controller->getPlayerScore();
+		return 0;
+	}
+
+	TimeComplexity PlayerService::getTimeComplexity()
+	{
+		if (snake_controller != nullptr)
+			return snake_controller->getTimeComplexity();
+		return TimeComplexity::NONE;
+	}
+
+	LinkedListOperations PlayerService::getLastOperation()
+	{
+		if (snake_controller != nullptr)
+			return snake_controller->getLastOperation();
+		return LinkedListOperations::NONE;
 	}
 
 	std::vector<sf::Vector2i> PlayerService::getCurrentSnakePositionList()
 	{
-		return snake_controller->getCurrentSnakePositionList();
+		if (snake_controller != nullptr)
+			return snake_controller->getCurrentSnakePositionList();
+		return std::vector<sf::Vector2i>();
 	}
 
 	void PlayerService::destroy()
 	{
-		delete (snake_controller);
+		if (snake_controller != nullptr)
+		{
+			delete snake_controller;
+			snake_controller = nullptr;
+		}
 	}
 }

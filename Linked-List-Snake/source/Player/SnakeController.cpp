@@ -20,6 +20,11 @@ namespace Player
 		single_linked_list = nullptr;
 		current_snake_direction = default_direction;
 		current_input_state = InputState::WAITING;
+		player_score = 0;
+
+		time_complexity = TimeComplexity::NONE;
+		last_linked_list_operation = LinkedListOperations::NONE;
+
 		createLinkedList();
 	}
 
@@ -50,47 +55,80 @@ namespace Player
 		{
 			ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::PICKUP);
 
+			player_score++;
+
 			food_service->destroyFood();
 			OnFoodCollected(food_type);
 		}
 	}
 
-	void SnakeController::OnFoodCollected(FoodType food_type)
+	void SnakeController::OnFoodCollected(Food::FoodType food_type)
 	{
 		switch (food_type)
 		{
 		case FoodType::PIZZA:
 			single_linked_list->insertNodeAtTail();
+			last_linked_list_operation = LinkedListOperations::INSERT_AT_TAIL;
+			time_complexity = TimeComplexity::N;
 			break;
 
 		case FoodType::BURGER:
 			single_linked_list->insertNodeAtHead();
+			last_linked_list_operation = LinkedListOperations::INSERT_AT_HEAD;
+			time_complexity = TimeComplexity::ONE;
 			break;
 
 		case FoodType::CHEESE:
 			single_linked_list->insertNodeAtMiddle();
+			last_linked_list_operation = LinkedListOperations::INSERT_AT_MID;
+			time_complexity = TimeComplexity::N;
 			break;
 
 		case FoodType::APPLE:
 			single_linked_list->removeNodeAtHead();
+			last_linked_list_operation = LinkedListOperations::REMOVE_AT_HEAD;
+			time_complexity = TimeComplexity::ONE;
 			break;
 
 		case FoodType::MANGO:
 			single_linked_list->removeNodeAtMiddle();
+			last_linked_list_operation = LinkedListOperations::REMOVE_AT_MID;
+			time_complexity = TimeComplexity::N;
 			break;
 
 		case FoodType::ORANGE:
 			single_linked_list->removeNodeAtTail();
+			last_linked_list_operation = LinkedListOperations::REMOVE_AT_TAIL;
+			time_complexity = TimeComplexity::N; 
 			break;
 
 		case FoodType::POISION:
 			single_linked_list->removeHalfNodes();
+			last_linked_list_operation = LinkedListOperations::DELETE_HALF_LIST;
+			time_complexity = TimeComplexity::N;
 			break;
 
 		case FoodType::ALCOHOL:
 			current_snake_direction = single_linked_list->reverse();
+			last_linked_list_operation = LinkedListOperations::REVERSE_LIST;
+			time_complexity = TimeComplexity::N;
 			break;
 		}
+	}
+
+	int SnakeController::getPlayerScore()
+	{
+		return player_score;
+	}
+
+	TimeComplexity SnakeController::getTimeComplexity()
+	{
+		return time_complexity;
+	}
+
+	LinkedListOperations SnakeController::getLastOperation()
+	{
+		return last_linked_list_operation;
 	}
 
 	std::vector<sf::Vector2i> SnakeController::getCurrentSnakePositionList()
@@ -209,8 +247,11 @@ namespace Player
 		current_input_state = InputState::WAITING;
 		elapsed_duration = 0.f;
 		restart_counter = 0.f;
-	}
+		player_score = 0;
 
+		time_complexity = TimeComplexity::NONE;
+		last_linked_list_operation = LinkedListOperations::NONE;
+	}
 
 	void SnakeController::delayedUpdate()
 	{
