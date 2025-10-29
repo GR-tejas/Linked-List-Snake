@@ -7,7 +7,7 @@ namespace LinkedListLib
 
     struct Node
     {
-        BodyPart body_part;     // Common data for all nodes
-        Node* next = nullptr;   // Common pointer for all nodes
+        BodyPart body_part;
+        Node* next = nullptr;
     };
 }
