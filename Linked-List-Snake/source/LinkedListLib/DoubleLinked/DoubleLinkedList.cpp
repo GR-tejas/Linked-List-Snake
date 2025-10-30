@@ -20,6 +20,59 @@ namespace LinkedListLib
             return new DoubleNode();
         }
 
+        void DoubleLinkedList::removeNodeAtMiddle()
+        {
+            if (head_node == nullptr) return;
+
+            linked_list_size--;
+
+            if (head_node->next == nullptr)
+            {
+                delete head_node;
+                head_node = nullptr;
+                return;
+            }
+
+            if (head_node->next->next == nullptr)
+            {
+                Node* second_node = head_node->next;
+                head_node->next = nullptr;
+                delete second_node;
+                return;
+            }
+
+            Node* slow = head_node; 
+            Node* fast = head_node;
+
+            while (fast != nullptr && fast->next != nullptr)
+            {
+                slow = slow->next;      
+                fast = fast->next->next;  
+            }
+
+            Node* middle_node = slow;
+            Node* previous_node = static_cast<DoubleNode*>(middle_node)->previous;
+            Node* next_node = middle_node->next;
+
+            if (previous_node != nullptr)
+            {
+                previous_node->next = next_node;
+            }
+
+            if (next_node != nullptr)
+            {
+                static_cast<DoubleNode*>(next_node)->previous = previous_node;
+            }
+
+            if (middle_node == head_node)
+            {
+                head_node = next_node;
+            }
+
+            middle_node->next = nullptr;
+            delete middle_node;
+        }
+
         void DoubleLinkedList::removeNodeAtHead()
         {
             if (head_node == nullptr) return;
@@ -35,7 +88,7 @@ namespace LinkedListLib
             }
 
             cur_node->next = nullptr; 
-            delete cur_node; 
+            delete cur_node;
         }
 
         void DoubleLinkedList::insertNodeAtTail()
@@ -61,6 +114,16 @@ namespace LinkedListLib
             static_cast<DoubleNode*>(new_node)->previous = cur_node;
 
             initializeNode(new_node, cur_node, Operation::TAIL);
+        }
+
+        void DoubleLinkedList::removeAllNodes()
+        {
+            if (head_node == nullptr) return;
+
+            while (head_node != nullptr)
+            {
+                removeNodeAtHead();
+            }
         }
 
         void DoubleLinkedList::insertNodeAtHead()
