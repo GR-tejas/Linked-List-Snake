@@ -126,6 +126,30 @@ namespace LinkedListLib
             }
         }
 
+        void DoubleLinkedList::removeHalfNodes()
+        {
+            if (head_node == nullptr) return;
+
+            if (linked_list_size <= 1)
+            {
+                removeAllNodes();
+                return;
+            }
+
+            int nodes_to_remove = linked_list_size / 2;
+            for (int i = 0; i < nodes_to_remove; i++)
+            {
+                if (head_node != nullptr)
+                {
+                    removeNodeAtHead();
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+
         void DoubleLinkedList::insertNodeAtHead()
         {
             linked_list_size++;
