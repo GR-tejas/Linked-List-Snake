@@ -126,6 +126,38 @@ namespace LinkedListLib
             }
         }
 
+        Direction DoubleLinkedList::reverse()
+        {
+            if (head_node == nullptr || head_node->next == nullptr)
+            {
+                return (head_node != nullptr) ? head_node->body_part.getDirection() : Direction::RIGHT;
+            }
+
+            Node* current = head_node;
+            Node* new_head = nullptr;
+
+            while (current != nullptr)
+            {
+                Node* next_node = current->next;
+
+                DoubleNode* double_current = static_cast<DoubleNode*>(current);
+
+                Node* temp = double_current->previous;
+                double_current->previous = current->next;
+                current->next = temp;
+
+                new_head = current;
+
+                current = next_node;
+            }
+
+            head_node = new_head;
+
+            reverseNodeDirections();
+
+            return head_node->body_part.getDirection();
+        }
+
         void DoubleLinkedList::removeHalfNodes()
         {
             if (head_node == nullptr) return;
