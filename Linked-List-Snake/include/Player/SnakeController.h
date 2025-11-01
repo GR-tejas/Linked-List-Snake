@@ -100,6 +100,8 @@ namespace Player
 
 		std::vector<sf::Vector2i> getCurrentSnakePositionList();
 
+		bool isSnakeDead();
+
 		void createLinkedList(LinkedListType level_type);
 
 		void spawnSnake();

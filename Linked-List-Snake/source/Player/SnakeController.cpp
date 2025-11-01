@@ -164,6 +164,11 @@ namespace Player
 		return linked_list->getNodesPositionList();
 	}
 
+	bool SnakeController::isSnakeDead()
+	{
+		return current_snake_state == SnakeState::DEAD;
+	}
+
 	void SnakeController::update()
 	{
 		switch (current_snake_state)

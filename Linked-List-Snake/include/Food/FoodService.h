@@ -57,6 +57,8 @@ namespace Food
 
 		bool processFoodCollision(Node* head_node, FoodType& out_food_type);
 
+		void handleFoodSpawning();
+
 		void destroyFood();
 
 		void startFoodSpawning();

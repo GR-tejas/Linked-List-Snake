@@ -32,6 +32,8 @@ namespace Player
 
 		std::vector<sf::Vector2i> getCurrentSnakePositionList();
 
+		bool isPlayerDead();
+
 		int getPlayerScore();
 		TimeComplexity getTimeComplexity();
 		LinkedListOperations getLastOperation();

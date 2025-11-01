@@ -82,4 +82,6 @@ namespace Player
 			snake_controller = nullptr;
 		}
 	}
+
+	bool PlayerService::isPlayerDead()
 }

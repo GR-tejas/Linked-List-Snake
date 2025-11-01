@@ -53,6 +53,18 @@ namespace Food
         return false;
     }
 
+    void FoodService::handleFoodSpawning()
+    {
+        if (ServiceLocator::getInstance()->getPlayerService()->isPlayerDead()) return;
+
+        if (elapsed_duration >= spawn_duration)
+        {
+            destroyFood();
+            reset();
+            spawnFood();
+        }
+    }
+
     void FoodService::render()
     {
         if (current_food_item) current_food_item->render();
