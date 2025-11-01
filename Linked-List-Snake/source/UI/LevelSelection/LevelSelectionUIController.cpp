@@ -7,6 +7,7 @@
 #include "UI/UIElement/ImageView.h"
 #include "Global/Config.h"
 #include "Level/LevelService.h"
+#include "Level/LevelConfig.h"
 
 namespace UI
 {
@@ -15,6 +16,7 @@ namespace UI
     using namespace EventSpace;
     using namespace SoundSpace;
     using namespace Main;
+    using namespace Level;
 
     namespace LevelSelection
     {
@@ -81,15 +83,15 @@ namespace UI
         void LevelSelectionUIController::levelOneButtonCallback()
         {
             ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::BUTTON_CLICK);
-            GameService::setGameState(GameState::GAMEPLAY);
-            ServiceLocator::getInstance()->getLevelService()->createLevel(Level::LevelNumber::ONE);
+            GameService::setGameState(GameState::LINKED_LIST_SELECTION);
+            ServiceLocator::getInstance()->getLevelService()->setCurrentLevelNumber(Level::LevelNumber::ONE);
         }
 
         void LevelSelectionUIController::levelTwoButtonCallback()
         {
             ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::BUTTON_CLICK);
-            GameService::setGameState(GameState::GAMEPLAY);
-            ServiceLocator::getInstance()->getLevelService()->createLevel(Level::LevelNumber::TWO);
+            GameService::setGameState(GameState::LINKED_LIST_SELECTION);
+            ServiceLocator::getInstance()->getLevelService()->setCurrentLevelNumber(Level::LevelNumber::TWO);
         }
 
         void LevelSelectionUIController::menuButtonCallback()

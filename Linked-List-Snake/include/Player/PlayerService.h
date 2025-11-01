@@ -1,9 +1,12 @@
 #pragma once
 #include <vector>
 #include <SFML/System/Vector2.hpp> 
+#include "Level/LevelConfig.h"
 
 namespace Player
 {
+	using namespace Level; 
+
 	class SnakeController;
 
 	enum class TimeComplexity;
@@ -25,11 +28,14 @@ namespace Player
 		void update();
 		void render();
 
-		void spawnPlayer();
+		void spawnPlayer(LinkedListType level_type);
+
 		std::vector<sf::Vector2i> getCurrentSnakePositionList();
 
 		int getPlayerScore();
 		TimeComplexity getTimeComplexity();
 		LinkedListOperations getLastOperation();
+
+		SnakeController* getSnakeController();
 	};
 }

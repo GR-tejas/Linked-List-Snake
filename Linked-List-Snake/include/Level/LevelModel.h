@@ -1,4 +1,5 @@
 #pragma once
+#include "Level/LevelConfig.h"
 #include <SFML/System/Vector2.hpp>
 #include "Level/LevelData.h"
 #include "Element/ElementData.h" 

@@ -2,11 +2,9 @@
 #include <SFML/System/Vector2.hpp>
 #include <random>
 #include <vector>
+#include "LinkedListLib/Node.h"
 
-namespace LinkedList
-{
-	struct Node;
-}
+using namespace LinkedListLib;
 
 namespace Food
 {
@@ -57,7 +55,7 @@ namespace Food
 		void update();
 		void render();
 
-		bool processFoodCollision(LinkedList::Node* head_node, FoodType& out_food_type);
+		bool processFoodCollision(Node* head_node, FoodType& out_food_type);
 
 		void destroyFood();
 

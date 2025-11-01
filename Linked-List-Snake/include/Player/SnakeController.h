@@ -1,11 +1,14 @@
 #pragma once
 #include <SFML/System/Vector2.hpp>
 #include "Direction.h"
-#include "LinkedList/SingleLinkedList.h"
 #include "Food/FoodType.h"
+#include "LinkedListLib/LinkedList.h"
+#include "LinkedListLib/SingleLinked/SingleLinkedList.h"
+#include "LinkedListLib/DoubleLinked/DoubleLinkedList.h"
+#include "Level/LevelConfig.h" 
 
-using namespace LinkedList;
 using namespace Food;
+using namespace Level;
 
 namespace Player
 {
@@ -24,8 +27,8 @@ namespace Player
 	enum class TimeComplexity
 	{
 		NONE,
-		ONE,   // O(1)
-		N,     // O(n)
+		ONE,
+		N,
 	};
 
 	enum class LinkedListOperations
@@ -63,14 +66,16 @@ namespace Player
 		SnakeState current_snake_state;
 		InputState current_input_state;
 		Direction current_snake_direction;
-		SingleLinkedList* single_linked_list;
+
+		LinkedListLib::LinkedList* linked_list;
 
 		void processBodyCollision();
 		void processElementsCollision();
 		void processFoodCollision();
 		void OnFoodCollected(FoodType food_type);
 
-		void createLinkedList();
+		void initializeLinkedList();
+
 		void processPlayerInput();
 		void updateSnakeDirection();
 		void moveSnake();
@@ -94,6 +99,8 @@ namespace Player
 		LinkedListOperations getLastOperation();
 
 		std::vector<sf::Vector2i> getCurrentSnakePositionList();
+
+		void createLinkedList(LinkedListType level_type);
 
 		void spawnSnake();
 		void respawnSnake();

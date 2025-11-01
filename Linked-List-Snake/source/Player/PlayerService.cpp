@@ -37,10 +37,11 @@ namespace Player
 			snake_controller->render();
 	}
 
-	void PlayerService::spawnPlayer()
+	void PlayerService::spawnPlayer(LinkedListType level_type)
 	{
 		if (snake_controller != nullptr)
 		{
+			snake_controller->createLinkedList(level_type);
 			snake_controller->spawnSnake();
 		}
 	}

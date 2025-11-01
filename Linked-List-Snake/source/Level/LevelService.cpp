@@ -10,6 +10,7 @@ namespace Level
 	LevelService::LevelService()
 	{
 		level_controller = nullptr;
+		current_linked_list_type = LinkedListType::SINGLE_LINKED_LIST;
 
 		createLevelController();
 	}
@@ -39,12 +40,18 @@ namespace Level
 		level_controller->render();
 	}
 
-	void LevelService::createLevel(LevelNumber level_to_load)
+	void LevelService::setCurrentLevelNumber(LevelNumber level_to_load)
 	{
 		current_level = level_to_load;
-		spawnLevelElements(level_to_load);
-		spawnPlayer();
+	}
+
+	void LevelService::createLevel(LinkedListType linked_list_type)
+	{
+		current_linked_list_type = linked_list_type; 
+
+		spawnLevelElements(current_level);
 		spawnFood();
+		spawnPlayer(linked_list_type);
 	}
 
 	void LevelService::spawnFood()
@@ -66,6 +73,11 @@ namespace Level
 		return current_level;
 	}
 
+	LinkedListType LevelService::getCurrentLinkedListType()
+	{
+		return current_linked_list_type;
+	}
+
 	float LevelService::getCellWidth()
 	{
 		return level_controller->getCellWidth();
@@ -81,9 +93,8 @@ namespace Level
 		delete level_controller;
 	}
 
-	void LevelService::spawnPlayer()
+	void LevelService::spawnPlayer(LinkedListType linked_list_type)
 	{
-		ServiceLocator::getInstance()->getPlayerService()->spawnPlayer();
+		ServiceLocator::getInstance()->getPlayerService()->spawnPlayer(current_linked_list_type);
 	}
-
 }

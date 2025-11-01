@@ -1,11 +1,9 @@
 #pragma once
 #include <vector>
 #include <SFML/System/Vector2.hpp>
+#include "LinkedListLib/Node.h"
 
-namespace LinkedList
-{
-	struct Node;
-}
+using namespace LinkedListLib;
 
 namespace Element
 {
@@ -25,7 +23,7 @@ namespace Element
 
 		std::vector<sf::Vector2i> getElementsPositionList();
 
-		bool processElementsCollision(LinkedList::Node* head_node);
+		bool processElementsCollision(Node* head_node);
 
 		void initialize();
 		void update();

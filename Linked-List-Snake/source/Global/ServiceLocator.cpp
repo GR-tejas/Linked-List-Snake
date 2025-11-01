@@ -65,9 +65,9 @@ namespace Global
 		event_service->update();
 		time_service->update();
 		level_service->update();
-		player_service->update();
 		if (GameService::getGameState() == GameState::GAMEPLAY)
 		{
+			player_service->update();
 			element_service->update();
 			food_service->update();
 		}
@@ -79,9 +79,9 @@ namespace Global
 	{
 		graphic_service->render();
 		level_service->render();
-		player_service->render();
 		if (GameService::getGameState() == GameState::GAMEPLAY)
 		{
+			player_service->render();
 			element_service->render(); 
 			food_service->render();
 		}
